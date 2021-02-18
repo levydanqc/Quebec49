@@ -1,5 +1,6 @@
 ﻿using System;
 using SimulationLotterie;
+
 namespace Quebec49
 {
     class Program
