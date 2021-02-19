@@ -31,17 +31,30 @@ namespace SimulationLoterie
     {
         private int[] m_iLesQuantites;
 
+        /// <summary>
+        /// Constructeur de la classe Resultats.
+        /// Initialisation et déclaration du vecteur du nombre de gagnant par catégorie.
+        /// </summary>
         public Resulats()
         {
             m_iLesQuantites = new int[] { 0, 0, 0, 0, 0, 0 };
         }
+        /// <summary>
+        /// Nombre de gagnant par catégorie.
+        /// </summary>
+        /// <param name="indice">Indice du groupe dont on veut le nombre de gagnant.</param>
+        /// <returns>Le nombre de gagnant dans une catégorie.</returns>
         public int GetQuantite(Indice indice)
         {
             return m_iLesQuantites[(int)indice];
         }
-        public void AugmenterQuantite(Indice indice, int quantite = 1)
+        /// <summary>
+        /// Augmente le nombre de gagnant dans une catégorie.
+        /// </summary>
+        /// <param name="indice">Indice du groupe dont on veut augmenter la quantité de gagnant</param>
+        public void AugmenterQuantite(Indice indice)
         {
-            m_iLesQuantites[(int)indice] += quantite;
+            m_iLesQuantites[(int)indice]++;
         }
     }
 }
