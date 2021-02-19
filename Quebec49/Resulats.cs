@@ -7,7 +7,6 @@
  * 
  * But:     Représente les résultats d'un tirage.
  * ***************************************************************************/
-using System;
 namespace SimulationLoterie
 {
     /// <summary>
@@ -33,7 +32,7 @@ namespace SimulationLoterie
 
         /// <summary>
         /// Constructeur de la classe Resultats.
-        /// Initialisation et déclaration du vecteur du nombre de gagnant par catégorie.
+        /// Déclaration et initialisation du vecteur du nombre de gagnant par catégorie.
         /// </summary>
         public Resulats()
         {
