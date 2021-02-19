@@ -1,7 +1,7 @@
 ﻿/******************************************************************************
- * Classe:  Resultats
+ * Classe:  Resultat
  * 
- * Fichier: Resultats.cs
+ * Fichier: Resultat.cs
  * 
  * Auteur:  Dan Lévy
  * 
@@ -26,15 +26,15 @@ namespace SimulationLoterie
         SixSurSix
     }
 
-    public class Resulats
+    public class Resultat
     {
         private int[] m_iLesQuantites;
 
         /// <summary>
-        /// Constructeur de la classe Resultats.
-        /// Déclaration et initialisation du vecteur du nombre de gagnant par catégorie.
+        /// Constructeur de la classe Resultat.
+        /// Déclaration et initialisation   du vecteur du nombre de gagnant par catégorie.
         /// </summary>
-        public Resulats()
+        public Resultat()
         {
             m_iLesQuantites = new int[] { 0, 0, 0, 0, 0, 0 };
         }
