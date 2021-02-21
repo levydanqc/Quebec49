@@ -7,11 +7,15 @@
  * 
  * But:     Représente un groupe de nombres (6) à jouer pour un tirage.
  * ***************************************************************************/
+using Utilitaires;
+using System.Linq;
+using System;
 namespace SimulationLoterie
 {
     public class Mise
     {
-        private int[] m_iLesNombres = new int[49];
+        public const int iTailleSelection = 6;
+        private int[] m_iLesNombres;
 
         /// <summary>
         /// Constructeur de la classe Mise.
@@ -20,18 +24,18 @@ namespace SimulationLoterie
         /// </summary>
         public Mise()
         {
-            for (int i = 1; i < 50; i++)
+            m_iLesNombres = new int[iTailleSelection];
+            int next;
+            for (int i = 0; i < m_iLesNombres.Length; i++)
             {
-                m_iLesNombres[i] = i;
+                do
+                {
+                    next = Aleatoire.GenererNombre(48) + 1;
+                } while (m_iLesNombres.Contains(next));
+                m_iLesNombres[i] = next;
             }
+            Array.Sort(m_iLesNombres);
         }
-        /// <summary>
-        /// Fonction évaluant un nombre dans l'intervalle [1, 49].
-        /// </summary>
-        /// <param name="x">Nomre devant être évalué</param>
-        /// <returns>'True' si le nombre est dans l'intervalle,
-        /// 'False' autrement.</returns>
-        bool inRange(int x) => ((x - 49) * (x - 1) <= 0);
         /// <summary>
         /// Permet d'obtenir un nombre dans le vecteur des nombres du Loto Québec.
         /// </summary>
@@ -39,7 +43,7 @@ namespace SimulationLoterie
         /// <returns>Le nombre correspondant dans le vecteur ou -1 si l'indice n'est pas valide.</returns>
         public int GetNombre(int indice)
         {
-            if (inRange(indice))
+            if (Interval.InRange(indice))
             {
                 return m_iLesNombres[indice];
             }
