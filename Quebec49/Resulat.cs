@@ -36,7 +36,7 @@ namespace SimulationLoterie
         /// </summary>
         public Resultat()
         {
-            m_iLesQuantites = new int[] { 0, 0, 0, 0, 0, 0 };
+            m_iLesQuantites = new int[6];
         }
         /// <summary>
         /// Nombre de gagnant par catégorie.
