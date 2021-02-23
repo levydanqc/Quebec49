@@ -20,15 +20,25 @@ namespace SimulationLoterie
         private Resultat m_leResultat;
         private const int NB_MISES_MIN = 100000;
         private const int NB_MISES_MAX = 300000;
-
+        /// <summary>
+        /// Constructeur de la classe Tirage.
+        /// Initie la date du tirage avec la date en paramètre.
+        /// </summary>
+        /// <param name="date">Date du tirage.</param>
         public Tirage(DateTime date)
         {
             m_dtmTirage = date.Date;
         }
+        /// <summary>
+        /// Accesseur de l'attribut m_dtmTirage.
+        /// </summary>
         public DateTime Date
         {
             get { return m_dtmTirage; }
         }
+        /// <summary>
+        /// Accesseur du nombre de mises.
+        /// </summary>
         public int NbMise
         {
             get
@@ -43,10 +53,19 @@ namespace SimulationLoterie
                 }
             }
         }
+        /// <summary>
+        /// Accesseur de l'attribut m_leResultat.
+        /// </summary>
         public Resultat Resultat
         {
             get { return m_leResultat; }
         }
+        /// <summary>
+        /// Permet de formater une chaine de caractère contenant l'ensemble
+        /// des informations du tirage, comme le résultat de chaque lot, le nombre
+        /// de mise ainsi que la date du tirage.
+        /// </summary>
+        /// <returns>Le chaine de caractère formatée.</returns>
         public override string ToString()
         {
             try
@@ -73,6 +92,10 @@ namespace SimulationLoterie
                 return "Les mises n'ont pas encore été validées pour ce tirage.";
             }
         }
+        /// <summary>
+        /// Permet d'inscrire les mises du tirage.
+        /// </summary>
+        /// <param name="nbMises">Nombre de mise à inscrire dans le tirage.</param>
         public void InscrireMises(int nbMises)
         {
             // Déclaration du vecteur de Mise
@@ -90,6 +113,11 @@ namespace SimulationLoterie
                 m_lesMises[i] = new Mise();
             }
         }
+        /// <summary>
+        /// Effecteur le tirage des numéros gagnants.
+        /// Enregistre 6 numéros choisis au hasard et un numéro complémentaire.
+        /// </summary>
+        /// <returns>True si le tirage s'est bien effectuer, False autrement.</returns>
         public bool Effectuer()
         {
             try // S'il y a des mises inscrites
@@ -107,12 +135,13 @@ namespace SimulationLoterie
                     iLesNombresCroissants[i] = next;
                 }
                 Array.Sort(iLesNombresCroissants);
+                // Copier la sélection de 6 nombres classés en ordre croissant
                 iLesNombresCroissants.CopyTo(m_iLesNombresGagnants, 0);
                 do
                 {
                     next = Aleatoire.GenererNombre(48) + 1;
                 } while (m_iLesNombresGagnants.Contains(next));
-                m_iLesNombresGagnants[m_iLesNombresGagnants.Length - 1] = next;
+                m_iLesNombresGagnants[m_iLesNombresGagnants.Length - 1] = next; // Ajouter le nombre complémentaire
                 return true;
             }
             catch // S'il n'y a pas de mise
@@ -120,18 +149,25 @@ namespace SimulationLoterie
                 return false;
             }
         }
+        /// <summary>
+        /// Valide les mises préalablement créées et enregistre
+        /// le nombre de gagnants pour chaque lot dans l'attribut m_leResultat.
+        /// </summary>
+        /// <returns>True si les mises ont bien été effectuées, False dans le cas
+        /// contraire.</returns>
         public bool ValiderMises()
         {
             m_leResultat = new Resultat();
             int iComplementaire = m_iLesNombresGagnants[m_iLesNombresGagnants.Length - 1];
-            foreach (Mise mise in m_lesMises) // Parcourir toutes les mises
+            foreach (var mise in m_lesMises) // Parcourir toutes les mises
             {
                 int iNbCorrespondants = 0; // Nombre de numéros identiques
                 bool bAvecComplementaire = false; // À le numéro complémetaire
 
-                for (int i = 0; i < Mise.iTailleSelection; i++) // Calcul des numéros identique
+                for (int i = 0; i < Mise.iTailleSelection; i++) // Comparer les numéros avec la mise
                 {
-                    if (m_iLesNombresGagnants[0..Mise.iTailleSelection].Contains(mise.GetNombre(i)))
+                    int x = mise.GetNombre(i);
+                    if (m_iLesNombresGagnants[0..Mise.iTailleSelection].Contains(x))
                     {
                         iNbCorrespondants++;
                     }
@@ -140,7 +176,6 @@ namespace SimulationLoterie
                         bAvecComplementaire = true;
                     }
                 }
-
                 /* Ajout de la mise dans le compte du résultat
                  * Les valeurs de iNbCorrespondants possibles sont :
                  * 0, 1, 2, 3, 4, 5 et 6
@@ -152,26 +187,36 @@ namespace SimulationLoterie
                  * 5    --> Indice 3
                  * 5+C  --> Indice 4
                  * 6    --> Indice 5
-                 * Donc il y a une tendance de -2.
-                 * Aussi, pour s'occuper des cas avec nombre complémentaire,
-                 * une formule mathématique permet de les séparer du groupe:
-                 * (x - 2) % 3 ==> retourne 0 lorsque i est égale à 2 ou 5.
-                 * 
-                 * 
-                 * 
-                 * Indice x = (Indice)Enum.Parse(typeof(Indice), "CinqSurSixPlus", true);
                  */
-                if (iNbCorrespondants >= 2) // Gagnant d'un lot
+                if (iNbCorrespondants >= 2) // Gagnant d'un lot
                 {
-                    if ((iNbCorrespondants - 2) % 3 == 0 && bAvecComplementaire) // Alors 2 ou 5
+                    if (iNbCorrespondants == 2 && bAvecComplementaire) // 2 + C
                     {
-                        m_leResultat.AugmenterQuantite((Indice)0);
-                        // TODO: Augmenter les résultats pour chaque lot..
-                        // TODO: Trouver une relation
+                        m_leResultat.AugmenterQuantite(Indice.DeuxSurSixPlus);
                     }
+                    else if (iNbCorrespondants == 5 && bAvecComplementaire) // 5 + C
+                    {
+                        m_leResultat.AugmenterQuantite(Indice.CinqSurSixPlus);
+                    }
+                    else if (iNbCorrespondants >= 3 && iNbCorrespondants <= 5)  // 3, 4, 5
+                    {
+                        m_leResultat.AugmenterQuantite((Indice)iNbCorrespondants - 2);
+                    }
+                    else if (iNbCorrespondants == 6) // 6
+                    {
+                        m_leResultat.AugmenterQuantite(Indice.SixSurSix);
+                    }
+
                 }
             }
 
+            for (int i = 0; i < Mise.iTailleSelection; i++)
+            {
+                if (m_leResultat.GetQuantite((Indice)i) != 0)
+                {
+                    return true;
+                }
+            }
 
             return false;
         }
