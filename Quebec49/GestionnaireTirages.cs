@@ -47,6 +47,7 @@ namespace SimulationLoterie
             }
 
         }
+
         /// <summary>
         /// Permet d'obtenir un tirage parmis le gestionnaire de tirages.
         /// </summary>

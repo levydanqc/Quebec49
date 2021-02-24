@@ -18,8 +18,9 @@ namespace SimulationLoterie
         private int[] m_iLesNombresGagnants;
         private Mise[] m_lesMises;
         private Resultat m_leResultat;
-        private const int NB_MISES_MIN = 100000;
-        private const int NB_MISES_MAX = 300000;
+        public const int NB_MISES_MIN = 100000;
+        public const int NB_MISES_MAX = 300000;
+
         /// <summary>
         /// Constructeur de la classe Tirage.
         /// Initie la date du tirage avec la date en paramètre.
@@ -29,6 +30,7 @@ namespace SimulationLoterie
         {
             m_dtmTirage = date.Date;
         }
+
         /// <summary>
         /// Accesseur de l'attribut m_dtmTirage.
         /// </summary>
@@ -36,6 +38,7 @@ namespace SimulationLoterie
         {
             get { return m_dtmTirage; }
         }
+
         /// <summary>
         /// Accesseur du nombre de mises.
         /// </summary>
@@ -43,16 +46,17 @@ namespace SimulationLoterie
         {
             get
             {
-                try
+                if (m_lesMises != null)
                 {
                     return m_lesMises.Length;
                 }
-                catch
+                else
                 {
                     return 0;
                 }
             }
         }
+
         /// <summary>
         /// Accesseur de l'attribut m_leResultat.
         /// </summary>
@@ -60,6 +64,7 @@ namespace SimulationLoterie
         {
             get { return m_leResultat; }
         }
+
         /// <summary>
         /// Permet de formater une chaine de caractère contenant l'ensemble
         /// des informations du tirage, comme le résultat de chaque lot, le nombre
@@ -68,30 +73,29 @@ namespace SimulationLoterie
         /// <returns>Le chaine de caractère formatée.</returns>
         public override string ToString()
         {
-            try
+            if (m_leResultat != null)
             {
                 int[] resultat = new int[6];
-                for (int i = 0; i < Mise.iTailleSelection; i++)
+                for (int i = 0; i < 6; i++)
                 {
                     resultat[i] = m_leResultat.GetQuantite((Indice)i);
                 }
-                return String.Format(
-                $@"
-                        {"Résultats du tirage du "} {m_dtmTirage.ToString("yyyy-MM-dd")}
-                        {"Nombre de mises:",-22} {NbMise,10}
-                        {"Gagnants du 2 sur 6+:",-22} {resultat[0],10}
-                        {"Gagnants du 3 sur 6:",-22} {resultat[1],10}
-                        {"Gagnants du 4 sur 6:",-22} {resultat[2],10}
-                        {"Gagnants du 5 sur 6:",-22} {resultat[3],10}
-                        {"Gagnants du 5 sur 6+:",-22} {resultat[4],10}
-                        {"Gagnants du 6 sur 6:",-22} {resultat[5],10}
-                ");
+                return String.Format($@"
+{"Résultats du tirage du "} {m_dtmTirage.ToString("yyyy-MM-dd")}
+{"Nombre de mises:",-22} {NbMise,10}
+{"Gagnants du 2 sur 6+:",-22} {resultat[0],10}
+{"Gagnants du 3 sur 6:",-22} {resultat[1],10}
+{"Gagnants du 4 sur 6:",-22} {resultat[2],10}
+{"Gagnants du 5 sur 6:",-22} {resultat[3],10}
+{"Gagnants du 5 sur 6+:",-22} {resultat[4],10}
+{"Gagnants du 6 sur 6:",-22} {resultat[5],10}");
             }
-            catch
+            else
             {
                 return "Les mises n'ont pas encore été validées pour ce tirage.";
             }
         }
+
         /// <summary>
         /// Permet d'inscrire les mises du tirage.
         /// </summary>
@@ -113,6 +117,7 @@ namespace SimulationLoterie
                 m_lesMises[i] = new Mise();
             }
         }
+
         /// <summary>
         /// Effecteur le tirage des numéros gagnants.
         /// Enregistre 6 numéros choisis au hasard et un numéro complémentaire.
@@ -120,9 +125,8 @@ namespace SimulationLoterie
         /// <returns>True si le tirage s'est bien effectuer, False autrement.</returns>
         public bool Effectuer()
         {
-            try // S'il y a des mises inscrites
+            if (m_lesMises != null) // S'il y a des mises inscrites
             {
-                int test = m_lesMises.Length; // Permet de vérifier que les mises ont été inscrites;
                 int[] iLesNombresCroissants = new int[Mise.iTailleSelection];
                 m_iLesNombresGagnants = new int[Mise.iTailleSelection + 1];
                 int next;
@@ -144,11 +148,12 @@ namespace SimulationLoterie
                 m_iLesNombresGagnants[m_iLesNombresGagnants.Length - 1] = next; // Ajouter le nombre complémentaire
                 return true;
             }
-            catch // S'il n'y a pas de mise
+            else // S'il n'y a pas de mise
             {
                 return false;
             }
         }
+
         /// <summary>
         /// Valide les mises préalablement créées et enregistre
         /// le nombre de gagnants pour chaque lot dans l'attribut m_leResultat.
@@ -210,7 +215,7 @@ namespace SimulationLoterie
                 }
             }
 
-            for (int i = 0; i < Mise.iTailleSelection; i++)
+            for (int i = 0; i < 6; i++)
             {
                 if (m_leResultat.GetQuantite((Indice)i) != 0)
                 {
