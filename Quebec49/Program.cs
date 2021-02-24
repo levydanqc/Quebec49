@@ -53,7 +53,8 @@ namespace Quebec49
                             Console.WriteLine("Génération du tirage du " +
                                 $"{leTirage.Date.ToString("yyyy-MM-dd")}...");
                             // Nombre entre [100 000, 200 000]
-                            leTirage.InscrireMises(Aleatoire.GenererNombre(Tirage.NB_MISES_MAX - Tirage.NB_MISES_MIN) + Tirage.NB_MISES_MIN);
+                            leTirage.InscrireMises(Aleatoire.GenererNombre(
+                                Tirage.NB_MISES_MAX - Tirage.NB_MISES_MIN) + Tirage.NB_MISES_MIN);
                             leTirage.Effectuer();
                         }
                         Console.WriteLine();
@@ -78,7 +79,8 @@ namespace Quebec49
                         }
                         else
                         {
-                            Console.WriteLine("Vous devez avoir généré des données pour voir les résultats des tirages.\n");
+                            Console.WriteLine("Vous devez avoir généré des données " +
+                            "pour voir les résultats des tirages.\n");
                         }
 
                         break;
@@ -94,7 +96,8 @@ namespace Quebec49
                                 iNbMisesTotal += leGestionnaireTirages.GetTirage(i).NbMise;
                                 for (int j = 0; j < 6; j++)
                                 {
-                                    lesResultatsTotaux[j] += leGestionnaireTirages.GetTirage(i).Resultat.GetQuantite((Indice)j);
+                                    lesResultatsTotaux[j] += leGestionnaireTirages.GetTirage(i)
+                                    .Resultat.GetQuantite((Indice)j);
                                 }
                             }
                             string strResultat = String.Format($@"
@@ -110,7 +113,8 @@ namespace Quebec49
                         }
                         else
                         {
-                            Console.WriteLine("Vous devez avoir généré des données et valider les mises pour voir les résultats des tirages.\n");
+                            Console.WriteLine("Vous devez avoir généré des données et valider les mises " +
+                            "pour voir les résultats des tirages.\n");
                         }
 
                         break;

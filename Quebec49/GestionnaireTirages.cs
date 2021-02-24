@@ -51,8 +51,10 @@ namespace SimulationLoterie
         /// <summary>
         /// Permet d'obtenir un tirage parmis le gestionnaire de tirages.
         /// </summary>
-        /// <param name="indice">L'indice dans le tableau du gestionnaire de tirages.</param>
-        /// <returns>Un Tirage à l'indice fournis dans le tableau du gestionnaire de tirages.</returns>
+        /// <param name="indice">L'indice dans le tableau du gestionnaire de
+        /// tirages.</param>
+        /// <returns>Un Tirage à l'indice fournis dans le tableau du gestionnaire
+        /// de tirages.</returns>
         public Tirage GetTirage(int indice)
         {
             if (Interval.InRange(indice, 104, 0))

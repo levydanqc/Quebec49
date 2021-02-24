@@ -32,7 +32,8 @@ namespace SimulationLoterie
 
         /// <summary>
         /// Constructeur de la classe Resultat.
-        /// Déclaration et initialisation   du vecteur du nombre de gagnant par catégorie.
+        /// Déclaration et initialisation   du vecteur du nombre de gagnant par
+        /// catégorie.
         /// </summary>
         public Resultat()
         {
@@ -41,7 +42,8 @@ namespace SimulationLoterie
         /// <summary>
         /// Nombre de gagnant par catégorie.
         /// </summary>
-        /// <param name="indice">Indice du groupe dont on veut le nombre de gagnant.</param>
+        /// <param name="indice">Indice du groupe dont on veut le nombre de
+        /// gagnant.</param>
         /// <returns>Le nombre de gagnant dans une catégorie.</returns>
         public int GetQuantite(Indice indice)
         {
@@ -50,7 +52,8 @@ namespace SimulationLoterie
         /// <summary>
         /// Augmente le nombre de gagnant dans une catégorie.
         /// </summary>
-        /// <param name="indice">Indice du groupe dont on veut augmenter la quantité de gagnant</param>
+        /// <param name="indice">Indice du groupe dont on veut augmenter la quantité
+        /// de gagnant</param>
         public void AugmenterQuantite(Indice indice)
         {
             m_iLesQuantites[(int)indice]++;

@@ -145,7 +145,8 @@ namespace SimulationLoterie
                 {
                     next = Aleatoire.GenererNombre(48) + 1;
                 } while (m_iLesNombresGagnants.Contains(next));
-                m_iLesNombresGagnants[m_iLesNombresGagnants.Length - 1] = next; // Ajouter le nombre complémentaire
+                // Ajouter le nombre complémentaire
+                m_iLesNombresGagnants[m_iLesNombresGagnants.Length - 1] = next;
                 return true;
             }
             else // S'il n'y a pas de mise
@@ -168,8 +169,8 @@ namespace SimulationLoterie
             {
                 int iNbCorrespondants = 0; // Nombre de numéros identiques
                 bool bAvecComplementaire = false; // À le numéro complémetaire
-
-                for (int i = 0; i < Mise.iTailleSelection; i++) // Comparer les numéros avec la mise
+                // Comparer les numéros avec la mise
+                for (int i = 0; i < Mise.iTailleSelection; i++)
                 {
                     int x = mise.GetNombre(i);
                     if (m_iLesNombresGagnants[0..Mise.iTailleSelection].Contains(x))

@@ -21,6 +21,7 @@ namespace Utilitaires
         /// <param name="min">Borne inclusive minimale de l'interval.</param>
         /// <returns>'True' si le nombre est dans l'intervalle,
         /// 'False' autrement.</returns>
-        public static bool InRange(int x, int max = 49, int min = 1) => ((x - max) * (x - min) <= 0);
+        public static bool InRange(
+            int x, int max = 49, int min = 1) => ((x - max) * (x - min) <= 0);
     }
 }
