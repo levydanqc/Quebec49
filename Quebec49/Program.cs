@@ -47,14 +47,17 @@ namespace Quebec49
                     case "1": // Génération de données
                         Console.Clear();
                         leGestionnaireTirages = new GestionnaireTirages();
-                        for (int i = 0; i < GestionnaireTirages.NB_TIRAGES; i++)
+                        for (int i = 0; i < GestionnaireTirages.NB_TIRAGES;
+                            i++)
                         {
-                            Tirage leTirage = leGestionnaireTirages.GetTirage(i);
+                            Tirage leTirage = leGestionnaireTirages
+                                .GetTirage(i);
                             Console.WriteLine("Génération du tirage du " +
                                 $"{leTirage.Date.ToString("yyyy-MM-dd")}...");
                             // Nombre entre [100 000, 200 000]
                             leTirage.InscrireMises(Aleatoire.GenererNombre(
-                                Tirage.NB_MISES_MAX - Tirage.NB_MISES_MIN) + Tirage.NB_MISES_MIN);
+                                Tirage.NB_MISES_MAX - Tirage.NB_MISES_MIN) +
+                                Tirage.NB_MISES_MIN);
                             leTirage.Effectuer();
                         }
                         Console.WriteLine();
@@ -63,24 +66,29 @@ namespace Quebec49
                         Console.Clear();
                         if (leGestionnaireTirages != null)
                         {
-                            for (int i = 0; i < GestionnaireTirages.NB_TIRAGES; i++)
+                            for (int i = 0; i < GestionnaireTirages.NB_TIRAGES;
+                                i++)
                             {
-                                bool bValidees = leGestionnaireTirages.GetTirage(i).ValiderMises();
+                                bool bValidees = leGestionnaireTirages
+                                    .GetTirage(i).ValiderMises();
                                 if (bValidees)
                                 {
-                                    string strResultat = leGestionnaireTirages.GetTirage(i).ToString();
+                                    string strResultat = leGestionnaireTirages
+                                        .GetTirage(i).ToString();
                                     Console.WriteLine(strResultat);
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Aucun résultat à afficher pour ce tirage.");
+                                    Console.WriteLine("Aucun résultat à " +
+                                        "afficher pour ce tirage.");
                                 }
                             }
                         }
                         else
                         {
-                            Console.WriteLine("Vous devez avoir généré des données " +
-                            "pour voir les résultats des tirages.\n");
+                            Console.WriteLine("Vous devez avoir généré des " +
+                                "données pour voir les résultats des tirages." +
+                                "\n");
                         }
 
                         break;
@@ -91,12 +99,15 @@ namespace Quebec49
                         {
                             int iNbMisesTotal = 0;
                             int[] lesResultatsTotaux = new int[6];
-                            for (int i = 0; i < GestionnaireTirages.NB_TIRAGES; i++)
+                            for (int i = 0; i < GestionnaireTirages.NB_TIRAGES;
+                                i++)
                             {
-                                iNbMisesTotal += leGestionnaireTirages.GetTirage(i).NbMise;
+                                iNbMisesTotal += leGestionnaireTirages
+                                    .GetTirage(i).NbMise;
                                 for (int j = 0; j < 6; j++)
                                 {
-                                    lesResultatsTotaux[j] += leGestionnaireTirages.GetTirage(i)
+                                    lesResultatsTotaux[j] +=
+                                        leGestionnaireTirages.GetTirage(i)
                                     .Resultat.GetQuantite((Indice)j);
                                 }
                             }
@@ -113,7 +124,8 @@ namespace Quebec49
                         }
                         else
                         {
-                            Console.WriteLine("Vous devez avoir généré des données et valider les mises " +
+                            Console.WriteLine("Vous devez avoir généré des " +
+                                "données et valider les mises " +
                             "pour voir les résultats des tirages.\n");
                         }
 
@@ -121,10 +133,13 @@ namespace Quebec49
                     case "4":
                         Console.Clear();
                         Console.WriteLine(strAsciiName);
-                        Console.WriteLine("\n\n\n\t\tTravail réalisé par Dan Levy.");
+                        Console.WriteLine("\n\n\n\t\tTravail réalisé par " +
+                            "Dan Levy.");
                         Console.WriteLine("\nDA: 181154");
-                        Console.WriteLine("\nGitLab: https://gitlab.com/levydanqc/quebec49.git");
-                        Console.WriteLine("\nCEGEP François-Xavier-Garneau\n\n");
+                        Console.WriteLine("\nGitLab: " +
+                            "https://gitlab.com/levydanqc/quebec49.git");
+                        Console.WriteLine("\nCEGEP François-Xavier-Garneau" +
+                            "\n\n");
 
                         break;
                     default:

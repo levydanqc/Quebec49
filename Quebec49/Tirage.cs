@@ -67,8 +67,8 @@ namespace SimulationLoterie
 
         /// <summary>
         /// Permet de formater une chaine de caractère contenant l'ensemble
-        /// des informations du tirage, comme le résultat de chaque lot, le nombre
-        /// de mise ainsi que la date du tirage.
+        /// des informations du tirage, comme le résultat de chaque lot,
+        /// le nombre de mise ainsi que la date du tirage.
         /// </summary>
         /// <returns>Le chaine de caractère formatée.</returns>
         public override string ToString()
@@ -99,7 +99,8 @@ namespace SimulationLoterie
         /// <summary>
         /// Permet d'inscrire les mises du tirage.
         /// </summary>
-        /// <param name="nbMises">Nombre de mise à inscrire dans le tirage.</param>
+        /// <param name="nbMises">Nombre de mise à inscrire dans le tirage.
+        /// </param>
         public void InscrireMises(int nbMises)
         {
             // Déclaration du vecteur de Mise
@@ -122,7 +123,8 @@ namespace SimulationLoterie
         /// Effecteur le tirage des numéros gagnants.
         /// Enregistre 6 numéros choisis au hasard et un numéro complémentaire.
         /// </summary>
-        /// <returns>True si le tirage s'est bien effectuer, False autrement.</returns>
+        /// <returns>True si le tirage s'est bien effectuer, False autrement.
+        /// </returns>
         public bool Effectuer()
         {
             if (m_lesMises != null) // S'il y a des mises inscrites
@@ -159,12 +161,13 @@ namespace SimulationLoterie
         /// Valide les mises préalablement créées et enregistre
         /// le nombre de gagnants pour chaque lot dans l'attribut m_leResultat.
         /// </summary>
-        /// <returns>True si les mises ont bien été effectuées, False dans le cas
-        /// contraire.</returns>
+        /// <returns>True si les mises ont bien été effectuées, False dans le
+        /// cas contraire.</returns>
         public bool ValiderMises()
         {
             m_leResultat = new Resultat();
-            int iComplementaire = m_iLesNombresGagnants[m_iLesNombresGagnants.Length - 1];
+            int iComplementaire = m_iLesNombresGagnants[m_iLesNombresGagnants
+                .Length - 1];
             foreach (var mise in m_lesMises) // Parcourir toutes les mises
             {
                 int iNbCorrespondants = 0; // Nombre de numéros identiques
@@ -173,11 +176,13 @@ namespace SimulationLoterie
                 for (int i = 0; i < Mise.iTailleSelection; i++)
                 {
                     int x = mise.GetNombre(i);
-                    if (m_iLesNombresGagnants[0..Mise.iTailleSelection].Contains(x))
+                    if (m_iLesNombresGagnants[0..Mise.iTailleSelection]
+                        .Contains(x))
                     {
                         iNbCorrespondants++;
                     }
-                    if (iComplementaire == mise.GetNombre(i) && !bAvecComplementaire)
+                    if (iComplementaire == mise.GetNombre(i) &&
+                        !bAvecComplementaire)
                     {
                         bAvecComplementaire = true;
                     }
@@ -185,8 +190,8 @@ namespace SimulationLoterie
                 /* Ajout de la mise dans le compte du résultat
                  * Les valeurs de iNbCorrespondants possibles sont :
                  * 0, 1, 2, 3, 4, 5 et 6
-                 * Les valeurs à rejeter son 0 et 1, car aucun lot n'y est associé.
-                 * Il reste donc 2, 3, 4, 5 et 6.
+                 * Les valeurs à rejeter son 0 et 1, car aucun lot n'y est
+                 * associé. Il reste donc 2, 3, 4, 5 et 6.
                  * 2+C  --> Indice 0
                  * 3    --> Indice 1
                  * 4    --> Indice 2
@@ -200,13 +205,16 @@ namespace SimulationLoterie
                     {
                         m_leResultat.AugmenterQuantite(Indice.DeuxSurSixPlus);
                     }
-                    else if (iNbCorrespondants == 5 && bAvecComplementaire) // 5 + C
+                    // 5 + C
+                    else if (iNbCorrespondants == 5 && bAvecComplementaire)
                     {
                         m_leResultat.AugmenterQuantite(Indice.CinqSurSixPlus);
                     }
-                    else if (iNbCorrespondants >= 3 && iNbCorrespondants <= 5)  // 3, 4, 5
+                    // 3, 4, 5
+                    else if (iNbCorrespondants >= 3 && iNbCorrespondants <= 5)
                     {
-                        m_leResultat.AugmenterQuantite((Indice)iNbCorrespondants - 2);
+                        m_leResultat.AugmenterQuantite(
+                            (Indice)iNbCorrespondants - 2);
                     }
                     else if (iNbCorrespondants == 6) // 6
                     {

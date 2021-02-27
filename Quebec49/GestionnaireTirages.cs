@@ -13,14 +13,15 @@ namespace SimulationLoterie
 {
     public class GestionnaireTirages
     {
-        public const int NB_TIRAGES = 104; // Nombre de tirage par année (2/semaine) 
+        // Nombre de tirage par année (2/semaine) 
+        public const int NB_TIRAGES = 104;
         private Tirage[] m_lesTirages;
 
         /// <summary>
         /// Constructeur de la classe GestionnaireTirages.
         /// Déclaration et initialisation des instances de la classe Tirage
-        /// dont la date correspont aux 104 mercredi et samedi suivant la date actuelle.
-        /// </summary>
+        /// dont la date correspont aux 104 mercredi et samedi suivant la date
+        /// actuelle. </summary>
         public GestionnaireTirages()
         {
             /* Les valeurs de dtmDate.DayOfWeek sont:
@@ -37,7 +38,8 @@ namespace SimulationLoterie
 
             for (int i = 0; i < m_lesTirages.Length; i++)
             {
-                while ((int)dtmToday.DayOfWeek != 3 && (int)dtmToday.DayOfWeek != 6)
+                while ((int)dtmToday.DayOfWeek != 3 &&
+                    (int)dtmToday.DayOfWeek != 6)
                 {
                     // Ajoute 1 jours tant que != Mercredi ou Samedi
                     dtmToday = dtmToday.AddDays(1);
@@ -53,8 +55,8 @@ namespace SimulationLoterie
         /// </summary>
         /// <param name="indice">L'indice dans le tableau du gestionnaire de
         /// tirages.</param>
-        /// <returns>Un Tirage à l'indice fournis dans le tableau du gestionnaire
-        /// de tirages.</returns>
+        /// <returns>Un Tirage à l'indice fournis dans le tableau du
+        /// gestionnaire de tirages.</returns>
         public Tirage GetTirage(int indice)
         {
             if (Interval.InRange(indice, 104, 0))

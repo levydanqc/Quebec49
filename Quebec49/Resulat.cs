@@ -52,8 +52,8 @@ namespace SimulationLoterie
         /// <summary>
         /// Augmente le nombre de gagnant dans une catégorie.
         /// </summary>
-        /// <param name="indice">Indice du groupe dont on veut augmenter la quantité
-        /// de gagnant</param>
+        /// <param name="indice">Indice du groupe dont on veut augmenter la
+        /// quantité de gagnant</param>
         public void AugmenterQuantite(Indice indice)
         {
             m_iLesQuantites[(int)indice]++;

@@ -37,8 +37,8 @@ namespace SimulationLoterie
             Array.Sort(m_iLesNombres);
         }
         /// <summary>
-        /// Permet d'obtenir un nombre dans le vecteur des nombres du Loto Québec.
-        /// </summary>
+        /// Permet d'obtenir un nombre dans le vecteur des nombres du
+        /// Loto Québec. </summary>
         /// <param name="indice">Indice dont on veut le nombre.</param>
         /// <returns>Le nombre correspondant dans le vecteur ou 
         /// -1 si l'indice n'est pas valide.</returns>
