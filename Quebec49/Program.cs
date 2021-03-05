@@ -73,9 +73,8 @@ namespace Quebec49
                                     .GetTirage(i).ValiderMises();
                                 if (bValidees)
                                 {
-                                    string strResultat = leGestionnaireTirages
-                                        .GetTirage(i).ToString();
-                                    Console.WriteLine(strResultat);
+                                    Console.WriteLine(leGestionnaireTirages
+                                        .GetTirage(i));
                                 }
                                 else
                                 {
@@ -94,9 +93,9 @@ namespace Quebec49
                         break;
                     case "3":
                         Console.Clear();
-                        Console.WriteLine("Sommaire des résultats");
                         if (leGestionnaireTirages != null)
                         {
+                            Console.WriteLine("Sommaire des résultats");
                             int iNbMisesTotal = 0;
                             int[] lesResultatsTotaux = new int[6];
                             for (int i = 0; i < GestionnaireTirages.NB_TIRAGES;
